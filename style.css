@@ -1,0 +1,115 @@
+/* General Settings */
+html, body{
+	margin: 0px;
+	height: 100%;
+}
+
+/* Grids Settings */
+#sidebar{
+	grid-area: sidebar;
+	overflow-y: hidden;
+	text-align: center;
+	border-bottom: #fff 5px solid;
+}
+
+#content{
+	grid-area: content;
+}
+
+.header{
+	grid-area: header;
+	font-family: 'Caveat', cursive;
+}
+
+.footer{
+grid-area: footer;
+}
+
+.sideBarItem{
+	display: inline-block;
+	max-height: 50px;
+	max-width: 50px;
+	padding: 5px;
+	outline: none;
+}
+
+.sideBarItem:hover{
+	box-shadow: 1px 1px 5px #000;
+}
+
+.sideBarItem img{
+	max-height: 50px;
+	max-width: 50px;
+}
+
+.wrapper{
+	display: grid;
+	height: 100%;
+	grid-template-columns: 70px 230px  minmax(500px, 1fr);
+	grid-template-rows: 35px minmax(500px, 1fr) 160px;
+	grid-template-areas:
+			"header header header"
+			"sidebar content content"
+			"colourP colourP options";
+	background-color: #fff;
+	color: #636363;
+}
+
+.box{
+	background-color: #636363;
+	color: #fff;
+	font-size: 150%;
+}
+
+.header{
+	background-color: #636363;
+}
+
+/* Color Palette */
+.colourPalette{
+	grid-area: colourP;
+	display:flex;
+	flex-direction:grid;
+	flex-flow: wrap;
+}
+
+.colourSwatches{
+	box-sizing: border-box;
+	width: 40px;
+	height: 40px;
+	max-height: 40px;
+	max-width: 40px;
+	margin: 5px;
+	border-radius: 50%;
+	outline: none;
+}
+
+/* Option Settings */
+.options{
+	grid-area: options;
+	padding: 15px 20px;
+}
+
+select{
+	width: 15%;
+	height: 30%;
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+/* Buttons */
+#selectButton,
+#directionButton,
+.headerButton{
+	font-family: 'Open Sans', sans-serif;
+	font-size: .8rem;
+	margin-left: 5px;
+	font-weight: 600;
+}
+
+#directionButton{
+	width: 15%;
+	height: 30%;
+	text-align: center;
+	text-transform: uppercase;
+}

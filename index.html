@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="lib/p5.min.js"></script>
+    <script src="lib/p5.dom.js"></script>
+
+    <script src="sketch.js"></script>
+
+    <!-- add extra scripts below -->
+    <script src="toolbox.js"></script>
+    <script src="colourPalette.js"></script>
+    <script src="helperFunctions.js"></script>
+
+    <script src="./tools/freehandTool.js"></script>
+    <script src="./tools/lineToTool.js"></script>
+    <script src="./tools/sprayCanTool.js"></script>
+    <script src="./tools/mirrorDrawTool.js"></script>
+    <script src="./tools/stampTool.js"></script>
+    <script src="./tools/drawShapesTool.js"></script>
+    <script src="./tools/scissorsTool.js"></script> 
+    <script src="./tools/snapshotTool.js"></script> 
+    <!--  Upcoming Tools  -->
+    <script src="./tools/eraserTool.js"></script>
+
+    <link rel="icon" href="./assets/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Paint</title>
+  </head>
+  <body>
+  	<div class="wrapper">
+      <!--   Header     -->
+      <div class="box header"> 
+        <span>🎨 My Drawing App</span>
+        <button class="headerButton" id="clearButton">Clear</button>
+        <button class="headerButton" id="saveImageButton">Save Image</button>
+      </div>
+      <!--   Body     -->
+      <div class="box" id="sidebar"></div>
+      <div id="content"></div>
+      <!--   Footer     -->
+      <div class="box colourPalette"></div>
+      <div class="box options"></div>
+	</div>
+  </body>
+</html>
