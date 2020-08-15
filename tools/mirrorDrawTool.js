@@ -22,10 +22,12 @@ function MirrorDrawTool() {
 	var previousOppositeMouseX = -1;
 	var previousOppositeMouseY = -1;
 
+	var strokeWidth = 1;
+	
 	this.draw = function() {
 		//display the last save state of pixels
 		updatePixels();
-        strokeWeight(10);
+        strokeWeight(strokeWidth);
         
 		//do the drawing if the mouse is pressed
 		if(mouseIsPressed){
@@ -121,8 +123,9 @@ function MirrorDrawTool() {
 	//toggle the line of symmetry between horizonatl to vertical
 	this.populateOptions = function() {
 		select(".options").html(
-			"<button id='directionButton'>Make Horizontal</button>");
-		// 	//click handler
+			
+			"<div>Stroke Weight <br /> <input type='range' id='StrokeWeight'><\/div> <button id='directionButton'>Make Horizontal</button>");
+		//click handler
 		select("#directionButton").mouseClicked(function() {
 			var button = select("#" + this.elt.id);
 			if (self.axis == "x") {
@@ -133,6 +136,17 @@ function MirrorDrawTool() {
 				self.axis = "x";
 				self.lineOfSymmetry = width / 2;
 				button.html('Make Horizontal');
+			}
+		});
+
+		select("#StrokeWeight").value(strokeWidth);
+		//click handler
+		select("#StrokeWeight").input(function() {
+			if (this.value() !== "") {
+				let newWidth = parseInt(this.value());
+				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 101) {
+					strokeWidth = newWidth;
+				}
 			}
 		});
 	};

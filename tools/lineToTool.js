@@ -9,10 +9,13 @@ function LineToTool() {
 	var startMouseY = -1;
 	var drawing = false;
 
+	var strokeWidth = 1;
+
 	//draw the line on the screen
 	this.draw = function() {
 		//allow only drawing when mouse is clicked
-		if(mouseIsPressed){
+		strokeWeight(strokeWidth);
+		if (mouseIsPressed) {
 		//If a new line is drawing
 		if (startMouseX == -1){
 			startMouseX = mouseX;
@@ -35,5 +38,29 @@ function LineToTool() {
 		startMouseX = -1;
 		startMouseY = -1;
 		};
+	};
+
+	this.unselectTool = function() {
+		updatePixels();
+		//clear options
+		select(".options").html("");
+		strokeWeight(1);
+	};
+
+	//adds a button and click handler to the options area. When clicked
+	//toggle the line of symmetry between horizonatl to vertical
+	this.populateOptions = function() {
+		select(".options").html(
+			"<div>Stroke Weight <br /> <input type='range' id='StrokeWeight'><\/div>");
+		select("#StrokeWeight").value(strokeWidth);
+		//click handler
+		select("#StrokeWeight").input(function() {
+			if (this.value() !== "") {
+				let newWidth = parseInt(this.value());
+				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 101) {
+					strokeWidth = newWidth;
+				}
+			}
+		});
 	};
 };

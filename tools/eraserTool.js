@@ -12,8 +12,10 @@ function EraserTool() {
     var previousMouseX = -1;
 	var previousMouseY = -1;
 
-    this.draw = function() {
+	var strokeWidth = 1;
 
+    this.draw = function() {
+		strokeWeight(strokeWidth);
 		//if the mouse is pressed
 		if(mouseIsPressed){
 			//check if they previousX and Y are -1. set them to the current
@@ -26,8 +28,6 @@ function EraserTool() {
 			//there to the current mouse location
 			else{
                 push();
-                //set stroke weight to 10 as default
-                strokeWeight(10);
                 //override stroke color to white
                 stroke("#fff");
                 line(previousMouseX, previousMouseY, mouseX, mouseY);
@@ -42,5 +42,29 @@ function EraserTool() {
 			previousMouseX = -1;
 			previousMouseY = -1;
         }
-    };
+	};
+	
+	this.unselectTool = function() {
+		updatePixels();
+		//clear options
+		select(".options").html("");
+		strokeWeight(1);
+	};
+
+	//adds a button and click handler to the options area. When clicked
+	//toggle the line of symmetry between horizonatl to vertical
+	this.populateOptions = function() {
+		select(".options").html(
+			"<div>Stroke Weight <br /> <input type='range' id='StrokeWeight'><\/div>");
+		select("#StrokeWeight").value(strokeWidth);
+		// 	//click handler
+		select("#StrokeWeight").input(function() {
+			if (this.value() !== "") {
+				let newWidth = parseInt(this.value());
+				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 101) {
+					strokeWidth = newWidth;
+				}
+			}
+		});
+	};
 };
