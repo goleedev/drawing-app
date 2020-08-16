@@ -123,8 +123,7 @@ function MirrorDrawTool() {
 	//toggle the line of symmetry between horizonatl to vertical
 	this.populateOptions = function() {
 		select(".options").html(
-			
-			"<div>Stroke Weight <br /> <input type='range' id='StrokeWeight'><\/div> <button id='directionButton'>Make Horizontal</button>");
+			"<div>Stroke Weight <br /> <input type='range' id='StrokeWeight' min='0' max='50'><\/div> <button id='directionButton'>Make Horizontal</button>");
 		//click handler
 		select("#directionButton").mouseClicked(function() {
 			var button = select("#" + this.elt.id);
@@ -144,7 +143,7 @@ function MirrorDrawTool() {
 		select("#StrokeWeight").input(function() {
 			if (this.value() !== "") {
 				let newWidth = parseInt(this.value());
-				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 101) {
+				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 51) {
 					strokeWidth = newWidth;
 				}
 			}

@@ -38,7 +38,6 @@ function StampTool() {
             else if(selectedStamp == "✨"){
                 image(sparkles, mouseX, mouseY, 50, 50); 
             }
-
         }
     }
     

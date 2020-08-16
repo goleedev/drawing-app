@@ -50,13 +50,13 @@ function FreehandTool() {
 	//toggle the line of symmetry between horizonatl to vertical
 	this.populateOptions = function() {
 		select(".options").html(
-			"<div>Stroke Weight <br /> <input type='range' id='StrokeWeight'><\/div>");
+			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight<br /><input type='range' id='StrokeWeight' min='0' max='50'> <output name='StrokeOutput' for='StrokeWeight'></output><\/form>");
 		select("#StrokeWeight").value(strokeWidth);
 		// 	//click handler
 		select("#StrokeWeight").input(function() {
 			if (this.value() !== "") {
 				let newWidth = parseInt(this.value());
-				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 101) {
+				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 51) {
 					strokeWidth = newWidth;
 				}
 			}

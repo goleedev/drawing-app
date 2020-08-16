@@ -61,7 +61,7 @@ function EraserTool() {
 		select("#StrokeWeight").input(function() {
 			if (this.value() !== "") {
 				let newWidth = parseInt(this.value());
-				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 101) {
+				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 51) {
 					strokeWidth = newWidth;
 				}
 			}

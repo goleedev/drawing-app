@@ -5,15 +5,26 @@ function HelperFunctions() {
 
 	//event handler for the clear button event. Clears the screen
 	select("#clearButton").mouseClicked(function() {
-		background('#fff');
-		//call loadPixels to update the drawing state
-		//this is needed for the mirror tool
-		loadPixels();
+		//creates a confirm message to ask if the user wants to clear the canvas
+		if (confirm("Are you sure you want to clear?")) {
+			background('#fff');
+			//call loadPixels to update the drawing state
+			//this is needed for the mirror tool
+			loadPixels();
+		};
 	});
 
 	//event handler for the save image button. saves the canvsa to the
 	//local file system.
-	select("#saveImageButton").mouseClicked(function() {
-		saveCanvas("myPicture", "jpg");
+	select("#saveImageButton").mouseClicked(function () {
+		//creates a confirm message to ask if the user wants to save the image
+		if (confirm("Are you sure you want to save?")) {
+			saveCanvas("myPicture", "jpg");
+		};
+	});
+
+	//event handler for the import button. Imports the images to the canvas.
+	select("#importButton").mouseClicked(function () {
+		
 	});
 };
