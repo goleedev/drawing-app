@@ -21,9 +21,9 @@ function MirrorDrawTool() {
 	//mouse coordinates for the other side of the Line of symmetry.
 	var previousOppositeMouseX = -1;
 	var previousOppositeMouseY = -1;
-
-	var strokeWidth = 1;
 	
+	var strokeWidth = 1;
+
 	this.draw = function() {
 		//display the last save state of pixels
 		updatePixels();
@@ -116,14 +116,14 @@ function MirrorDrawTool() {
 		//clear options
 		select(".options").html("");
         //reset strokeweight            
-        strokeWeight(1);
+		strokeWidth = 1;
 	};
 
 	//adds a button and click handler to the options area. When clicked
 	//toggle the line of symmetry between horizonatl to vertical
 	this.populateOptions = function() {
 		select(".options").html(
-			"<div>Stroke Weight <br /> <input type='range' id='StrokeWeight' min='0' max='50'><\/div> <button id='directionButton'>Make Horizontal</button>");
+			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form><button id='directionButton'>Make Horizontal</button>");
 		//click handler
 		select("#directionButton").mouseClicked(function() {
 			var button = select("#" + this.elt.id);

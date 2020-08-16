@@ -5,6 +5,9 @@ var colourP = null;
 var helpers = null;
 
 function setup() {
+	//set font	
+	defaultFont = loadFont('assets/Alata-Regular.ttf');
+
 	//create a canvas to fill the content div from index.html
 	canvasContainer = select('#content');
 	var c = createCanvas(canvasContainer.size().width, canvasContainer.size().height);

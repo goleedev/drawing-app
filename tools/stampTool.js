@@ -21,7 +21,7 @@ function StampTool() {
             imageMode(CENTER);
             //check what stamp option that users pick to draw stamps
             if(selectedStamp == "😃"){
-                image(smile, mouseX, mouseY, 50, 50); 
+                image(smile, mouseX, mouseY, 50, 50);
             }
             else if(selectedStamp == "😂"){
                 image(tearjoy, mouseX, mouseY, 50, 50); 

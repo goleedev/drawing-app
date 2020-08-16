@@ -51,7 +51,7 @@ function LineToTool() {
 	//toggle the line of symmetry between horizonatl to vertical
 	this.populateOptions = function() {
 		select(".options").html(
-			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight<br /><input type='range' id='StrokeWeight' min='0' max='50'> <output name='StrokeOutput' for='StrokeWeight'></output><\/form>");
+			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form>");
 		select("#StrokeWeight").value(strokeWidth);
 		//click handler
 		select("#StrokeWeight").input(function() {

@@ -23,25 +23,23 @@
     <script src="./tools/eraserTool.js"></script>
 
     <link rel="icon" href="./assets/favicon.ico" />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Paint</title>
   </head>
   <body>
   	<div class="wrapper">
       <!-- Header -->
-      <div class="box header"> 
-        <span>🎨</span>
-        <button class="headerButton" id="clearButton">Clear</button>
-        <button class="headerButton" id="saveImageButton">Save Image</button>
-        <button class="headerButton" id="importButton">Import</button>
+      <div class="border header"> 
+        <img src="/assets/import.png" class="headerButton" id="importButton">
+        <img src="/assets/save.png" class="headerButton" id="saveImageButton">
+        <img src="/assets/cancel.png" class="headerButton" id="clearButton">
+        <img src="/assets/colorpicker.png" class="headerButton" id="colorPickerButton">
       </div>
+      <div class="border" id="topbar"></div>
+      <div class="border options"></div>
       <!-- Body -->
-      <div class="box" id="sidebar"></div>
       <div id="content"></div>
       <!-- Footer -->
-      <div class="box colourPalette"></div>
-      <div class="box options"></div>
-	</div>
+      <div class="colourPalette"></div>
   </body>
 </html>
