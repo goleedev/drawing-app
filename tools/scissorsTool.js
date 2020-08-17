@@ -30,7 +30,7 @@ function ScissorsTool() {
 	var previousMouseX = -1;
 	var previousMouseY = -1;
 
-    this.draw = function () {
+    this.draw = function() {
 		//if the mouse is pressed
         if (mouseIsPressed) {
             if (selectMode == 0) {

@@ -5,9 +5,6 @@ var colourP = null;
 var helpers = null;
 
 function setup() {
-	//set font	
-	defaultFont = loadFont('assets/Alata-Regular.ttf');
-
 	//create a canvas to fill the content div from index.html
 	canvasContainer = select('#content');
 	var c = createCanvas(canvasContainer.size().width, canvasContainer.size().height);
@@ -23,14 +20,14 @@ function setup() {
 	//add the tools to the toolbox.
 	toolbox.addTool(new FreehandTool());
 	toolbox.addTool(new LineToTool());
-	toolbox.addTool(new SprayCanTool());
+	toolbox.addTool(new EraserTool());
 	toolbox.addTool(new MirrorDrawTool());
+	toolbox.addTool(new SprayCanTool());
     toolbox.addTool(new StampTool());
     toolbox.addTool(new DrawShapesTool());
 	toolbox.addTool(new ScissorsTool());
 	toolbox.addTool(new SnapshotTool());
     //place for upcoming tools
-	toolbox.addTool(new EraserTool());
 	background(255);
 }
 
@@ -43,5 +40,14 @@ function draw() {
 		toolbox.selectedTool.draw();
 	} else {
 		alert("it doesn't look like your tool has a draw method!");
+	}
+}
+
+//checks if drawing within the range of canvas area
+function innerCanvas() {
+	if (mouseIsPressed && (mouseX > 0) && (mouseY > 0) && (mouseY < select('#content').height)) {
+		return true;
+	} else {
+		return false;
 	}
 }

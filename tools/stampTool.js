@@ -16,26 +16,26 @@ function StampTool() {
     var selectedStamp = stamps[0];
     
     this.draw = function() {
-        if(mouseIsPressed){
+        if(innerCanvas()){
             //center the image position when stamp is displayed
             imageMode(CENTER);
             //check what stamp option that users pick to draw stamps
-            if(selectedStamp == "😃"){
+            if(selectedStamp === "😃"){
                 image(smile, mouseX, mouseY, 50, 50);
             }
-            else if(selectedStamp == "😂"){
+            else if(selectedStamp === "😂"){
                 image(tearjoy, mouseX, mouseY, 50, 50); 
             }
-            else if(selectedStamp == "😘"){
+            else if(selectedStamp === "😘"){
                 image(kiss, mouseX, mouseY, 50, 50); 
             }
-            else if(selectedStamp == "💖"){
+            else if(selectedStamp === "💖"){
                 image(heart, mouseX, mouseY, 50, 50); 
             }
-            else if(selectedStamp == "👍"){
+            else if(selectedStamp === "👍"){
                 image(thumbsUp, mouseX, mouseY, 50, 50); 
             }
-            else if(selectedStamp == "✨"){
+            else if(selectedStamp === "✨"){
                 image(sparkles, mouseX, mouseY, 50, 50); 
             }
         }

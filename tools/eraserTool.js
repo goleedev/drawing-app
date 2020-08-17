@@ -12,12 +12,13 @@ function EraserTool() {
     var previousMouseX = -1;
 	var previousMouseY = -1;
 
+	//set defulat stroke weight to 1
 	var strokeWidth = 1;
 
     this.draw = function() {
 		strokeWeight(strokeWidth);
 		//if the mouse is pressed
-		if(mouseIsPressed){
+		if(innerCanvas()){
 			//check if they previousX and Y are -1. set them to the current
 			//mouse X and Y if they are.
 			if (previousMouseX == -1){
@@ -44,11 +45,15 @@ function EraserTool() {
         }
 	};
 	
-	this.unselectTool = function() {
+	//when the tool is deselected update the pixels to just show the drawing and
+	//hide the line of symmetry. Also clear options
+	this.unselectTool = function () {
+		//update pixels
 		updatePixels();
 		//clear options
 		select(".options").html("");
-		strokeWeight(1);
+		//set stroke weight back to 1
+		strokeWidth = 1;
 	};
 
 	//adds a button and click handler to the options area. When clicked
@@ -59,7 +64,7 @@ function EraserTool() {
 		select("#StrokeWeight").value(strokeWidth);
 		// 	//click handler
 		select("#StrokeWeight").input(function() {
-			if (this.value() !== "") {
+			if (!innerCanvas() && this.value() !== "") {
 				let newWidth = parseInt(this.value());
 				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 51) {
 					strokeWidth = newWidth;

@@ -10,12 +10,14 @@ function FreehandTool() {
 	var previousMouseX = -1;
 	var previousMouseY = -1;
 
+	//set defulat stroke weight to 1
 	var strokeWidth = 1;
 
 	this.draw = function () {
-		strokeWeight(strokeWidth);
 		//if the mouse is pressed
-		if (mouseIsPressed) {
+		if (innerCanvas()) {
+			//change stroke weight
+			strokeWeight(strokeWidth);
 			//check if they previousX and Y are -1. set them to the current
 			//mouse X and Y if they are.
 			if (previousMouseX == -1) {
@@ -38,23 +40,28 @@ function FreehandTool() {
 			previousMouseY = -1;
 		}
 	};
-
+	
+	//unselect tool
 	this.unselectTool = function() {
+		//update pixels
 		updatePixels();
 		//clear options
 		select(".options").html("");
-		strokeWeight(1);
+		//set stroke weight back to 1
+		strokeWidth = 1;
 	};
 
 	//adds a button and click handler to the options area. When clicked
 	//toggle the line of symmetry between horizonatl to vertical
-	this.populateOptions = function() {
+	this.populateOptions = function () {
 		select(".options").html(
 			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form>");
+		select("#topbar").html(
+			"<div class='tool__des'><span class='tool__des-title'><img src='assets/idea.png' alt='help'>HELP</span></div>");
 		select("#StrokeWeight").value(strokeWidth);
-		// 	//click handler
+		//click handler
 		select("#StrokeWeight").input(function() {
-			if (this.value() !== "") {
+			if (!innerCanvas() && this.value() !== "") {
 				let newWidth = parseInt(this.value());
 				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 51) {
 					strokeWidth = newWidth;

@@ -9,27 +9,29 @@ function LineToTool() {
 	var startMouseY = -1;
 	var drawing = false;
 
+	//set defulat stroke weight to 1
+	strokeWeight(1);
 	var strokeWidth = 1;
 
 	//draw the line on the screen
 	this.draw = function() {
 		//allow only drawing when mouse is clicked
 		strokeWeight(strokeWidth);
-		if (mouseIsPressed) {
-		//If a new line is drawing
-		if (startMouseX == -1){
-			startMouseX = mouseX;
-			startMouseY = mouseY;
-			drawing = true;
-			//save the current pixel Array
-			loadPixels();
-		}
-		else{
-			//update the screen with the saved pixels to hide any previous lines between mouse pressed and released
-			updatePixels();
-			//draw the line
-			line(startMouseX, startMouseY, mouseX, mouseY);
-		}
+		if (innerCanvas()) {
+			//If a new line is drawing
+			if (startMouseX == -1){
+				startMouseX = mouseX;
+				startMouseY = mouseY;
+				drawing = true;
+				//save the current pixel Array
+				loadPixels();
+			}
+			else{
+				//update the screen with the saved pixels to hide any previous lines between mouse pressed and released
+				updatePixels();
+				//draw the line
+				line(startMouseX, startMouseY, mouseX, mouseY);
+			}
 		}
 		else if(drawing){
 		//save the pixels with the most recent line and reset the drawing bool and start locations
@@ -40,11 +42,14 @@ function LineToTool() {
 		};
 	};
 
+	//unselect tool
 	this.unselectTool = function() {
+		//update pixels
 		updatePixels();
 		//clear options
 		select(".options").html("");
-		strokeWeight(1);
+		//set stroke weight back to 1
+		strokeWidth = 1;
 	};
 
 	//adds a button and click handler to the options area. When clicked
@@ -55,7 +60,7 @@ function LineToTool() {
 		select("#StrokeWeight").value(strokeWidth);
 		//click handler
 		select("#StrokeWeight").input(function() {
-			if (this.value() !== "") {
+			if (!innerCanvas() && this.value() !== "") {
 				let newWidth = parseInt(this.value());
 				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 51) {
 					strokeWidth = newWidth;

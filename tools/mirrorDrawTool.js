@@ -22,6 +22,7 @@ function MirrorDrawTool() {
 	var previousOppositeMouseX = -1;
 	var previousOppositeMouseY = -1;
 	
+	//set defulat stroke weight to 1
 	var strokeWidth = 1;
 
 	this.draw = function() {
@@ -30,7 +31,7 @@ function MirrorDrawTool() {
         strokeWeight(strokeWidth);
         
 		//do the drawing if the mouse is pressed
-		if(mouseIsPressed){
+		if(innerCanvas()){
 			//if the previous values are -1 set them to the current mouse location
 			//and mirrored positions
 			if(previousMouseX == -1){
@@ -112,10 +113,11 @@ function MirrorDrawTool() {
 	//when the tool is deselected update the pixels to just show the drawing and
 	//hide the line of symmetry. Also clear options
 	this.unselectTool = function() {
+		//update pixels
 		updatePixels();
 		//clear options
 		select(".options").html("");
-        //reset strokeweight            
+		//reset strokeweight            
 		strokeWidth = 1;
 	};
 
@@ -137,11 +139,10 @@ function MirrorDrawTool() {
 				button.html('Make Horizontal');
 			}
 		});
-
 		select("#StrokeWeight").value(strokeWidth);
 		//click handler
 		select("#StrokeWeight").input(function() {
-			if (this.value() !== "") {
+			if (!innerCanvas() && this.value() !== "") {
 				let newWidth = parseInt(this.value());
 				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 51) {
 					strokeWidth = newWidth;

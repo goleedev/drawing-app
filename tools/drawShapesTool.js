@@ -12,14 +12,21 @@ function DrawShapesTool() {
 	var startMouseW, startMouseH;
     var dragging = false;
     
+    //set defulat stroke weight to 1
+    strokeWeight(1);
+	var strokeWidth = 1;
+    
     //stores shape options in an array
     var shapes = ["Rectangle", "Triangle", "Circle"];
     //set default shape option
     var selectedShapes = shapes[0];
-    
-    this.draw = function() {
+    var shapesDropDown, fillButton, noFillButton, slider;
+    noFill();
+
+    this.draw = function () {
+        strokeWeight(strokeWidth);
         //if mouse is pressed
-        if(mouseIsPressed){
+        if(innerCanvas()){
             //check if nothing is drawn on the canvas yet
             //replace start postion X and Y with current postion of X and Y
             if(startMouseX == -1){
@@ -73,22 +80,64 @@ function DrawShapesTool() {
     
     //deselect options to reset option settings
     this.unselectTool = function() {
-        select(".options").html("");
+        //update pixels
+		updatePixels();
+		//clear options
+		select(".options").html("");
+		//set stroke weight back to 1
+        strokeWidth = 1;
     }
 
     //create dropdown options at the bottom to select shapes
     this.populateOptions = function() {
-        //create shape selection
-        var shapesDropDown = createSelect();
+        //create shape selection, fill & no fill button, and slider
+        slider = createDiv("<form id='shapeSlider' oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form>");
+        shapesDropDown = createSelect();
+        fillButton = createButton('Fill');
+        noFillButton = createButton('No Fill');
+        fillButton.addClass('shapesButton');
+        noFillButton.addClass('shapesButton');
+        noFillButton.hide();
+        
         //loop through the length of shape array to set options
         for(var i = 0; i< shapes.length; i++) {
             shapesDropDown.option(shapes[i]);
         }
+        
         //add set option to HTML
         shapesDropDown.parent(select(".options"));
+        fillButton.parent(select(".options"));
+        noFillButton.parent(select(".options"));
+        slider.parent(select(".options"));
+        //set storke
+        select("#StrokeWeight").value(strokeWidth);
+		//click handler
+		select("#StrokeWeight").input(function() {
+			if (!innerCanvas() && this.value() !== "") {
+				let newWidth = parseInt(this.value());
+				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 51) {
+					strokeWidth = newWidth;
+				}
+			}
+        });
+        
         //modify status of shape's value when changed
         shapesDropDown.changed(function() {
             selectedShapes = shapesDropDown.value();
+        });
+
+        //fill button pressed no fill button shows up and fill the selected color
+        fillButton.mousePressed(function (selectedColour) {
+            fillButton.hide();
+            noFillButton.show();
+            fill(parseInt(selectedColour));
+        });
+        
+        //no fill button pressed fill button shows up and fills no color
+        noFillButton.mousePressed(function () {
+            noFillButton.hide();
+            fillButton.show();
+            noFill();
         });
     };
 };

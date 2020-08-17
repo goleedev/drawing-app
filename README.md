@@ -18,5 +18,11 @@ Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik"
 Range Style
 http://jsfiddle.net/HC2Pp/1/
 
+Snapshot
+https://editor.p5js.org/enickles/sketches/B1MU6V5Pf
+
+Popup
+https://codepen.io/jasonhowmans/pen/AiHyB
+
 ### Roadmap for Project
 Goeun Lee https://www.notion.so/6c5349d37237480eaac8e06580a8800b?v=b0b1086b40dd409d9a42a39922028df9

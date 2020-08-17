@@ -19,7 +19,7 @@ function ColourPalette() {
 		var c = this.id().split("Swatch")[0];
 
 		//set the selected colour and fill and stroke
-		self.selectedColour = c;
+		selectedColour = c;
 		fill(c);
 		stroke(c);
 
