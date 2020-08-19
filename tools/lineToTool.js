@@ -55,10 +55,18 @@ function LineToTool() {
 	//adds a button and click handler to the options area. When clicked
 	//toggle the line of symmetry between horizonatl to vertical
 	this.populateOptions = function() {
+		//add stroke weight slider and pop up modal
 		select(".options").html(
-			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form>");
+			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form><button class='open-modal'>Tip</button><div class='modal-container'><div class='modal'><button id='close-modal'>X</button><div><h2>Line To Tool</h2><p>User can draw straight lines of any stroke</p></div></div></div>");
+		//click handler for pop up modal
+		select('.open-modal').mouseClicked(function () {
+			select('.modal-container').addClass('visible');
+		})
+		select('#close-modal').mouseClicked(function() {
+			select('.modal-container').removeClass('visible');
+		})
+		//event handler for stroke weight slider
 		select("#StrokeWeight").value(strokeWidth);
-		//click handler
 		select("#StrokeWeight").input(function() {
 			if (!innerCanvas() && this.value() !== "") {
 				let newWidth = parseInt(this.value());

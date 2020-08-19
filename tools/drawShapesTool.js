@@ -99,6 +99,17 @@ function DrawShapesTool() {
         noFillButton.addClass('shapesButton');
         noFillButton.hide();
         
+        //add pop up modal
+        select(".options").html(
+			"<button class='open-modal'>Tip</button><div class='modal-container'><div class='modal select-modal'><button id='close-modal'>X</button><div><h2>Draw Shapes Tool</h2><p>User can draw shapes with/without filling them and can change the stroke weight.</p></div></div></div>");
+        //click handler for pop up modal
+		select('.open-modal').mouseClicked(function () {
+			select('.modal-container').addClass('visible');
+		})
+		select('#close-modal').mouseClicked(function() {
+			select('.modal-container').removeClass('visible');
+		})
+        
         //loop through the length of shape array to set options
         for(var i = 0; i< shapes.length; i++) {
             shapesDropDown.option(shapes[i]);
@@ -107,8 +118,11 @@ function DrawShapesTool() {
         //add set option to HTML
         shapesDropDown.parent(select(".options"));
         fillButton.parent(select(".options"));
+        fillButton.addClass('shapes-fill-button');
         noFillButton.parent(select(".options"));
+        noFillButton.addClass('shapes-fill-button');
         slider.parent(select(".options"));
+        
         //set storke
         select("#StrokeWeight").value(strokeWidth);
 		//click handler

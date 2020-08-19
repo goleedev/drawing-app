@@ -48,6 +48,16 @@ function StampTool() {
 
     //create dropdown options at the bottom to select emoji
     this.populateOptions = function () {
+        //add pop up modal
+        select(".options").html(
+			"<button class='open-modal'>Tip</button><div class='modal-container'><div class='modal select-modal'><button id='close-modal'>X</button><div><h2>Stamp Tool</h2><p>User can put a Emoji stamp sticker on the canvas.</p></div></div></div>");
+        //click handler for pop up modal
+		select('.open-modal').mouseClicked(function () {
+			select('.modal-container').addClass('visible');
+		})
+		select('#close-modal').mouseClicked(function() {
+			select('.modal-container').removeClass('visible');
+		})
         //create stamp selection
         var stampDropDown = createSelect();
         //loop through the length of stamps arrays to set options

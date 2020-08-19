@@ -8,7 +8,7 @@ html, body{
 	margin: 0px;
 }
 
-* {
+*{
 	font-family: 'Alata', sans-serif;
 }
 
@@ -25,18 +25,18 @@ select{
 	text-align: center;
 }
 
-.border {
+.border{
 	background-color: #fafaf6;
 	border-bottom: 2px solid rgba(0,0,0,0.1);
 }
 
 /* Selection Style */
-::-moz-selection {
+::-moz-selection{
 	background: #ffdc33;
 	color: #444452;
 }
 
-::selection {
+::selection{
 	background: #ffdc33;
 	color: #444452;
 }
@@ -45,22 +45,23 @@ select{
 .wrapper{
 	display: grid;
 	height: 100vh;
-	grid-template-columns: 1.5fr repeat(2, 2fr) minmax(600px, 1fr);
+	grid-template-columns: 310px 1100px minmax(400px, 1fr);
 	grid-template-rows: 50px minmax(600px, 1fr) 100px;
 	grid-template-areas:
-			"header options options topbar"
-			"content content content content"
-			"colourP colourP colourP colourP";
+			"header options topbar"
+			"content content content"
+			"colourP colourP colourP";
 	background-color: #fff;
 }
 
 #topbar{
 	grid-area: topbar;
-	display: flexbox;
-	flex-wrap: wrap;
 	overflow: hidden;
-	margin-right: 15px;
 	text-align: center;
+	z-index: 1000;
+	display: inline-block;
+	position: absolute;
+	right: 0px;
 }
 
 #content{
@@ -95,7 +96,7 @@ select{
 	cursor: pointer;
 }
 
-.topBarItem img {
+.topBarItem img{
 	width: 30px;
 	height: 30px;
 	padding: 7px;
@@ -134,7 +135,6 @@ select{
 /* Buttons */
 .options button,
 #selectButton,
-#directionButton,
 .headerButton{
 	width: 30px;
 	margin-left: 5px;
@@ -146,13 +146,15 @@ select{
 				 -3px -3px 6px #ffffff;
 }
 
+.shapesButton,
 #directionButton,
 .options button{
 	display: inline-block;
 	position: fixed;
 	width: 200px;
-	top: 10px;
-	left: 650px;
+	top: 5px;
+	padding: 10px;
+	left: 700px;
 	text-align: center;
 	text-transform: uppercase;
 	font-weight: bold;
@@ -165,13 +167,28 @@ select{
 	left: 950px !important;
 }
 
-.tool__des:hover,
+.shapesButton:hover,
+#directionButton:hover,
 .options button:hover{
 	background: linear-gradient(145deg, #e1e1dd, #ffffff);
 	box-shadow:  3px 3px 6px #d5d5d1, 
              	-3px -3px 6px #ffffff;
 }
 
+.shapes-fill-button,
+.scissors-button,
+.snap-button{
+	left: 315px !important;
+	width: 160px !important;
+	font-size: 1.1rem;
+	position: absolute;
+	top: 0 !important;
+}
+
+.shapes-fill-button{
+	left: 900px !important;
+	width: 70px !important;
+}
 
 /* Stroke & Size Slider */
 input[type=range]{
@@ -200,32 +217,106 @@ input[type="range"]::-webkit-slider-thumb:hover{
 				inset -1px -1px 2px #ffff3c;
 } 
 
-#shapeSlider {
+#shapeSlider{
 	display: inline-block;
 	position: fixed;
 	top: 11px;
-	left: 540px;
+	left: 545px;
 }
 
 /* Tool Helper Pop Up */
-.tool__des-title img {
-	width: 25px;
-}
-
-.tool__des-title span {
+.open-modal {
+	display: inline-block !important;
+	position: absolute !important;
+	overflow: hidden !important;
+	top: 0px !important;
+	left: 215px !important;
+	padding: 10px 0 !important;
+	width: 90px !important;
+	font-size: 1.1rem;
 	text-align: center;
-}
-
-.tool__des {
-	position: absolute;
-	right: 5px;
-	cursor: pointer;
-	padding: 7px 0;
-	width: 100px;
-	font-size: 1.2rem;
-	text-align: center;
+	text-decoration:none;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
 	border-radius: 10px;
 	background: #fafaf6;
 	box-shadow:  3px 3px 6px #d5d5d1, 
 				 -3px -3px 6px #ffffff;
 }
+
+.select-modal{
+	top: 40px !important;
+}
+  
+.modal-container {
+	display: flex;
+	pointer-events: none;
+	opacity: 0;
+	will-change: transform, opacity;
+  
+	-webkit-transform: scale(1.15);
+	transform: scale(1.15);
+  
+	-webkit-transition: -webkit-transform 0.1s
+	cubic-bezier(0.465, 0.183, 0.153, 0.946),
+	opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+	transition: transform 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946),
+	opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+}
+  
+.modal-container.visible {
+	pointer-events: auto;
+	opacity: 1;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+  
+	-webkit-transition: -webkit-transform 0.3s
+	cubic-bezier(0.465, 0.183, 0.153, 0.946),
+	opacity 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+	transition: transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946),
+	opacity 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+}
+  
+.modal {
+	position: absolute;
+	top: 13px;
+	left: -165px;
+	pointer-events: none;
+	width: 200px;
+	height: 100px;
+	opacity: 1;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	background-color: #fff;
+	z-index: 10000;
+}
+
+.modal h2{
+	font-size: 1rem;
+	font-weight: bold;
+	text-align: center;
+	background-color: #ffdc33;
+	width: 65%;
+	margin: 10px auto;
+}
+
+.modal p{
+	font-size: .7rem;
+	padding: 0 20px;
+}
+  
+.modal:hover {
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+  
+#close-modal {
+	position: absolute;
+	top: 10px;
+	left: 165px;
+	width: 23px;
+	height: 23px;
+	font-size: .7rem;
+	padding: 0;
+	pointer-events: all;
+}
+  

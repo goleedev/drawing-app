@@ -30,10 +30,18 @@ function SprayCanTool() {
     }
 
     this.populateOptions = function() { 
+        //add spread size slider and pop up modal
         select(".options").html(
-			"<form oninput='SizeOutput.value=SpreadSize.value'>Spread Size <input type='range' id='SpreadSize' min='1' max='50'> <output name='SizeOutput' for='SpreadSize'>10</output><\/form>");
-		select("#SpreadSize").value(size);
-		//click handler
+			"<form oninput='SizeOutput.value=SpreadSize.value'>Spread Size <input type='range' id='SpreadSize' min='1' max='50'> <output name='SizeOutput' for='SpreadSize'>10</output><\/form><button class='open-modal'>Tip</button><div class='modal-container'><div class='modal'><button id='close-modal'>X</button><div><h2>Spray Can Tool</h2><p>User can draw with spray can. User can modify the spread size.</p></div></div></div>");
+        //click handler for pop up modal
+		select('.open-modal').mouseClicked(function () {
+			select('.modal-container').addClass('visible');
+		})
+		select('#close-modal').mouseClicked(function() {
+			select('.modal-container').removeClass('visible');
+		})
+        //event handler for spread size
+        select("#SpreadSize").value(size);
 		select("#SpreadSize").input(function() {
 			if (!innerCanvas() && this.value() !== "") {
 				let newSize = parseInt(this.value());

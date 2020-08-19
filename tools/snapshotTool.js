@@ -41,9 +41,21 @@ function SnapshotTool() {
     this.populateOptions = function () {
         //create stamp selection
         let snapshot = createButton('snap');
+        
+        //add pop up modal
+        select(".options").html(
+            "<button class='open-modal'>tip</button><div class='modal-container'><div class='modal select-modal'><button id='close-modal'>X</button><div><h2>Snapshot Tool</h2><p>User can take a snapshot of the moment. *Camera access required</p></div></div></div>");
+        //click handler for pop up modal
+        select('.open-modal').mouseClicked(function () {
+            select('.modal-container').addClass('visible');
+        })
+        select('#close-modal').mouseClicked(function() {
+            select('.modal-container').removeClass('visible');
+        })
 
         //add set option to HTML
         snapshot.parent(select(".options"));
+        snapshot.addClass('snap-button');
         //modify status of stamp's value when changed
         snapshot.mousePressed(takeSnapshot);
     };

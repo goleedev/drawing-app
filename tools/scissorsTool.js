@@ -10,7 +10,20 @@ function ScissorsTool() {
     var selectedArea = {x:0, y:0, w: 100, h:100};
  
     this.populateOptions = function () {
+        //add pop up modal
+        select(".options").html(
+			"<button class='open-modal'>Tip</button><div class='modal-container'><div class='modal select-modal'><button id='close-modal'>X</button><div><h2>Scissors Tool</h2><p>User can select and cut the selected area.</p></div></div></div>");
+        //click handler for pop up modal
+		select('.open-modal').mouseClicked(function () {
+			select('.modal-container').addClass('visible');
+		})
+		select('#close-modal').mouseClicked(function() {
+			select('.modal-container').removeClass('visible');
+		})
+        
+        //add select and cut button
         selectButton = createButton();
+        selectButton.addClass('scissors-button');
         selectButton.html('Select Area');
         selectButton.parent(select(".options"));
         //click handler

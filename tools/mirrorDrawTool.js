@@ -124,10 +124,18 @@ function MirrorDrawTool() {
 	//adds a button and click handler to the options area. When clicked
 	//toggle the line of symmetry between horizonatl to vertical
 	this.populateOptions = function() {
+		//add stroke weight slider, direction changer and pop up modal
 		select(".options").html(
-			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form><button id='directionButton'>Make Horizontal</button>");
-		//click handler
-		select("#directionButton").mouseClicked(function() {
+			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form><button id='directionButton'>Make Horizontal</button><button class='open-modal'>Tip</button><div class='modal-container'><div class='modal'><button id='close-modal'>X</button><div><h2>Mirror Draw Tool</h2><p>User can draw for the identical drawings either by horizontal or by vertical.</p></div></div>");
+		//click handler for pop up modal
+		select('.open-modal').mouseClicked(function () {
+			select('.modal-container').addClass('visible');
+		})
+		select('#close-modal').mouseClicked(function() {
+			select('.modal-container').removeClass('visible');
+		})
+		//click handler for direction changer
+		select("#directionButton").mouseClicked(function () {
 			var button = select("#" + this.elt.id);
 			if (self.axis == "x") {
 				self.axis = "y";
@@ -140,7 +148,7 @@ function MirrorDrawTool() {
 			}
 		});
 		select("#StrokeWeight").value(strokeWidth);
-		//click handler
+		//event handler for stroke weight slider
 		select("#StrokeWeight").input(function() {
 			if (!innerCanvas() && this.value() !== "") {
 				let newWidth = parseInt(this.value());
