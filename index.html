@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Libraries -->
     <script src="lib/p5.min.js"></script>
     <script src="lib/p5.dom.js"></script>
-
+    
+    <!-- Script -->
     <script src="sketch.js"></script>
 
     <!-- Add Extra Scripts Below -->
@@ -14,27 +16,31 @@
     <!-- Add Tools -->
     <script src="./tools/freehandTool.js"></script>
     <script src="./tools/lineToTool.js"></script>
-    <script src="./tools/sprayCanTool.js"></script>
     <script src="./tools/mirrorDrawTool.js"></script>
+    <script src="./tools/sprayCanTool.js"></script>
     <script src="./tools/stampTool.js"></script>
     <script src="./tools/drawShapesTool.js"></script>
+    <script src="./tools/textTool.js"></script>
     <script src="./tools/scissorsTool.js"></script> 
     <script src="./tools/snapshotTool.js"></script> 
-    <!-- Upcoming Tools -->
     <script src="./tools/eraserTool.js"></script>
 
+    <!-- Favicon -->
     <link rel="icon" href="./assets/favicon.ico" />
+    <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Title -->
     <title>Paint</title>
   </head>
   <body>
   	<div class="wrapper">
       <!-- Header -->
-      <div class="border header"> 
-        <img src="/assets/import.png" class="headerButton" id="importButton">
-        <img src="/assets/save.png" class="headerButton" id="saveImageButton">
+      <div class="border header">
         <img src="/assets/cancel.png" class="headerButton" id="clearButton">
+        <img src="/assets/sun.png" class="headerButton" id="darkmodeButton">
+        <img src="/assets/save.png" class="headerButton" id="saveImageButton">
         <img src="/assets/colorpicker.png" class="headerButton" id="colorPickerButton">
+        <img src="/assets/colorpicker.png" class="headerButton" id="colorPickerHideButton">
       </div>
       <div class="border topbar" id="topbar"></div>
       <div class="border options"></div>
@@ -42,7 +48,7 @@
       <!-- Body -->
       <div id="content"></div>
       
-      <!-- Footer -->
+      <!-- Colour Palette -->
       <div class="colourPalette"></div>
   </body>
 </html>

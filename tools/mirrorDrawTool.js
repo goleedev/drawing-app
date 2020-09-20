@@ -1,35 +1,29 @@
 //Mirror draw tool
 //Users can draw mirrored drawings with vertical and horizontal lines
-function MirrorDrawTool() {
+function MirrorDrawTool(){
     this.icon = "assets/mirrordraw.png";
 	this.name = "mirrorDrawTool";
-
 	//which axis is being mirrored (x or y) x is default
 	this.axis = "x";
 	//line of symmetry is halfway across the screen
 	this.lineOfSymmetry = width / 2;
-
 	//this changes in the jquery click handler. So storing it as
 	//a variable self now means we can still access it in the handler
 	var self = this;
-
 	//where was the mouse on the last time draw was called.
 	//set it to -1 to begin with
 	var previousMouseX = -1;
 	var previousMouseY = -1;
-
 	//mouse coordinates for the other side of the Line of symmetry.
 	var previousOppositeMouseX = -1;
 	var previousOppositeMouseY = -1;
-	
 	//set defulat stroke weight to 1
 	var strokeWidth = 1;
 
-	this.draw = function() {
+	this.draw = function(){
 		//display the last save state of pixels
 		updatePixels();
         strokeWeight(strokeWidth);
-        
 		//do the drawing if the mouse is pressed
 		if(innerCanvas()){
 			//if the previous values are -1 set them to the current mouse location
@@ -46,7 +40,6 @@ function MirrorDrawTool() {
 				line(previousMouseX, previousMouseY, mouseX, mouseY);
 				previousMouseX = mouseX;
 				previousMouseY = mouseY;
-
 				//these are for the mirrored drawing the other side of the
 				//line of symmetry
 				var oX = this.calculateOpposite(mouseX, "x");
@@ -62,23 +55,21 @@ function MirrorDrawTool() {
 			previousMouseY = -1;
 			previousOppositeMouseX = -1;
 			previousOppositeMouseY = -1;
-
 		}
-
 		//after the drawing is done save the pixel state. We don't want the
 		//line of symmetry to be part of our drawing
 		loadPixels();
-
 		//push the drawing state so that we can set the stroke weight and colour
 		push();
 		strokeWeight(3);
 		stroke("#636363");
 		//draw the line of symmetry
-		if (this.axis == "x") {
+		if(this.axis == "x"){
 			line(width / 2, 0, width / 2, height);
-		} else {
-			line(0, height / 2, width, height / 2);
 		}
+		else{
+			line(0, height / 2, width, height / 2);
+		};
 		//return to the original stroke
 		pop();
 	};
@@ -89,30 +80,28 @@ function MirrorDrawTool() {
 	 *@param a [x,y]: the axis of the coordinate (y or y)
 	 *@return number: the opposite coordinate
 	 */
-	this.calculateOpposite = function(n, a) {
+	this.calculateOpposite = function(n, a){
 		//if the axis isn't the one being mirrored return the same
 		//value
-		if (a != this.axis) {
+		if (a != this.axis){
 			return n;
 		}
-
 		//if n is less than the line of symmetry return a coorindate
 		//that is far greater than the line of symmetry by the distance from
 		//n to that line.
-		if (n < this.lineOfSymmetry) {
+		if(n < this.lineOfSymmetry){
 			return this.lineOfSymmetry + (this.lineOfSymmetry - n);
 		}
-
 		//otherwise a coordinate that is smaller than the line of symmetry
 		//by the distance between it and n.
-		else {
+		else{
 			return this.lineOfSymmetry - (n - this.lineOfSymmetry);
-		}
+		};
 	};
 
 	//when the tool is deselected update the pixels to just show the drawing and
 	//hide the line of symmetry. Also clear options
-	this.unselectTool = function() {
+	this.unselectTool = function(){
 		//update pixels
 		updatePixels();
 		//clear options
@@ -123,39 +112,41 @@ function MirrorDrawTool() {
 
 	//adds a button and click handler to the options area. When clicked
 	//toggle the line of symmetry between horizonatl to vertical
-	this.populateOptions = function() {
+	this.populateOptions = function(){
 		//add stroke weight slider, direction changer and pop up modal
 		select(".options").html(
-			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form><button id='directionButton'>Make Horizontal</button><button class='open-modal'>Tip</button><div class='modal-container'><div class='modal'><button id='close-modal'>X</button><div><h2>Mirror Draw Tool</h2><p>User can draw for the identical drawings either by horizontal or by vertical.</p></div></div>");
+			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form><button id='directionButton'>Make Horizontal</button><button class='open-modal'>Tip</button><div class='modal-container'><div class='modal'><button id='close-modal'>X</button><div><h2>Mirror Draw Tool</h2><p>User can draw for the identical drawings either by horizontal or by vertical.</p></div></div>"
+		);
 		//click handler for pop up modal
-		select('.open-modal').mouseClicked(function () {
-			select('.modal-container').addClass('visible');
-		})
-		select('#close-modal').mouseClicked(function() {
-			select('.modal-container').removeClass('visible');
-		})
+		select(".open-modal").mouseClicked(function(){
+			select(".modal-container").addClass("visible");
+		});
+		select("#close-modal").mouseClicked(function(){
+			select(".modal-container").removeClass("visible");
+		});
 		//click handler for direction changer
-		select("#directionButton").mouseClicked(function () {
+		select("#directionButton").mouseClicked(function(){
 			var button = select("#" + this.elt.id);
-			if (self.axis == "x") {
+			if(self.axis == "x"){
 				self.axis = "y";
 				self.lineOfSymmetry = height / 2;
-				button.html('Make Vertical');
-			} else {
+				button.html("Make Vertical");
+			}
+			else{
 				self.axis = "x";
 				self.lineOfSymmetry = width / 2;
-				button.html('Make Horizontal');
-			}
+				button.html("Make Horizontal");
+			};
 		});
 		select("#StrokeWeight").value(strokeWidth);
 		//event handler for stroke weight slider
-		select("#StrokeWeight").input(function() {
-			if (!innerCanvas() && this.value() !== "") {
+		select("#StrokeWeight").input(function(){
+			if(!innerCanvas() && this.value() !== ""){
 				let newWidth = parseInt(this.value());
-				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 51) {
+				if(!isNaN(newWidth) && newWidth > 0 && newWidth < 51){
 					strokeWidth = newWidth;
-				}
-			}
+				};
+			};
 		});
 	};
 };

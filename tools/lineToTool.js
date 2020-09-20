@@ -1,25 +1,24 @@
 //Line To Tool
 //A tool to draw straight lines on the screen. 
 //It Allows users to create a straight line from the current mouse position to the last point that user moved.
-function LineToTool() {
+function LineToTool(){
 	this.icon = "assets/lineto.png";
 	this.name = "lineToTool";
-
+	//start with default settings
 	var startMouseX = -1;
 	var startMouseY = -1;
 	var drawing = false;
-
 	//set defulat stroke weight to 1
 	strokeWeight(1);
 	var strokeWidth = 1;
 
 	//draw the line on the screen
-	this.draw = function() {
+	this.draw = function(){
 		//allow only drawing when mouse is clicked
 		strokeWeight(strokeWidth);
-		if (innerCanvas()) {
+		if(innerCanvas()){
 			//If a new line is drawing
-			if (startMouseX == -1){
+			if(startMouseX == -1){
 				startMouseX = mouseX;
 				startMouseY = mouseY;
 				drawing = true;
@@ -43,7 +42,7 @@ function LineToTool() {
 	};
 
 	//unselect tool
-	this.unselectTool = function() {
+	this.unselectTool = function(){
 		//update pixels
 		updatePixels();
 		//clear options
@@ -54,26 +53,27 @@ function LineToTool() {
 
 	//adds a button and click handler to the options area. When clicked
 	//toggle the line of symmetry between horizonatl to vertical
-	this.populateOptions = function() {
+	this.populateOptions = function(){
 		//add stroke weight slider and pop up modal
 		select(".options").html(
-			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form><button class='open-modal'>Tip</button><div class='modal-container'><div class='modal'><button id='close-modal'>X</button><div><h2>Line To Tool</h2><p>User can draw straight lines of any stroke</p></div></div></div>");
+			"<form oninput='StrokeOutput.value=StrokeWeight.value'>Stroke Weight <input type='range' id='StrokeWeight' min='1' max='50'> <output name='StrokeOutput' for='StrokeWeight'>1</output><\/form><button class='open-modal'>Tip</button><div class='modal-container'><div class='modal'><button id='close-modal'>X</button><div><h2>Line To Tool</h2><p>User can draw straight lines of any stroke</p></div></div></div>"
+		);
 		//click handler for pop up modal
-		select('.open-modal').mouseClicked(function () {
-			select('.modal-container').addClass('visible');
-		})
-		select('#close-modal').mouseClicked(function() {
-			select('.modal-container').removeClass('visible');
-		})
+		select(".open-modal").mouseClicked(function(){
+			select(".modal-container").addClass("visible");
+		});
+		select("#close-modal").mouseClicked(function(){
+			select(".modal-container").removeClass("visible");
+		});
 		//event handler for stroke weight slider
 		select("#StrokeWeight").value(strokeWidth);
-		select("#StrokeWeight").input(function() {
-			if (!innerCanvas() && this.value() !== "") {
+		select("#StrokeWeight").input(function(){
+			if(!innerCanvas() && this.value() !== ""){
 				let newWidth = parseInt(this.value());
-				if (!isNaN(newWidth) && newWidth > 0 && newWidth < 51) {
+				if(!isNaN(newWidth) && newWidth > 0 && newWidth < 51){
 					strokeWidth = newWidth;
-				}
-			}
+				};
+			};
 		});
 	};
 };

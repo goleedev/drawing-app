@@ -12,7 +12,7 @@ function setup() {
 
 	//create helper functions and the colour palette
 	helpers = new HelperFunctions();
-	colourP = new ColourPalette();
+	colourPalette = new ColourPalette();
 
 	//create a toolbox for storing the tools
 	toolbox = new Toolbox();
@@ -20,14 +20,16 @@ function setup() {
 	//add the tools to the toolbox.
 	toolbox.addTool(new FreehandTool());
 	toolbox.addTool(new LineToTool());
-	toolbox.addTool(new EraserTool());
 	toolbox.addTool(new MirrorDrawTool());
 	toolbox.addTool(new SprayCanTool());
     toolbox.addTool(new StampTool());
-    toolbox.addTool(new DrawShapesTool());
+	toolbox.addTool(new DrawShapesTool());
+	toolbox.addTool(new TextTool());
 	toolbox.addTool(new ScissorsTool());
 	toolbox.addTool(new SnapshotTool());
-    //place for upcoming tools
+	toolbox.addTool(new EraserTool());
+	
+	//background
 	background(255);
 }
 

@@ -19,7 +19,7 @@ output{
 }
 
 select{
-	width: 200px;
+	width: 110px !important;
 	height: 30px;
 	font-size: 1.2rem;
 	text-align: center;
@@ -45,12 +45,11 @@ select{
 .wrapper{
 	display: grid;
 	height: 100vh;
-	grid-template-columns: 310px 1100px minmax(400px, 1fr);
-	grid-template-rows: 50px minmax(600px, 1fr) 100px;
+	grid-template-columns: 310px minmax(1000px, 1fr) 300px;
+	grid-template-rows: 50px minmax(600px, 1fr);
 	grid-template-areas:
 			"header options topbar"
-			"content content content"
-			"colourP colourP colourP";
+			"content content content";
 	background-color: #fff;
 }
 
@@ -113,10 +112,20 @@ select{
 
 /* Color Palette */
 .colourPalette{
-	grid-area: colourP;
-	display:flex;
-	flex-direction:grid;
-	flex-flow: wrap;
+	visibility: hidden;
+	display: flex;
+	flex-wrap: wrap;
+	position: absolute;
+	width: 250px;
+	top: 50px;
+	left: 60px;
+	background: linear-gradient(145deg, #e1e1dd, #ffffff);
+	box-shadow:  3px 3px 6px #d5d5d1, 
+	-3px -3px 6px #ffffff;
+}
+
+.colourPalette.visible {
+	visibility: visible;
 }
 
 .colourSwatches{
@@ -130,6 +139,7 @@ select{
 	border: 2px solid #000;
 	outline: none;
 }
+
 /* Tool Details Settings 
 ***************************/
 /* Buttons */
@@ -137,6 +147,28 @@ select{
 #selectButton,
 .headerButton{
 	width: 30px;
+	margin-left: 5px;
+	padding: 7px;
+	cursor: pointer;
+	border-radius: 10px;
+	background: #fafaf6;
+	box-shadow:  3px 3px 6px #d5d5d1, 
+				 -3px -3px 6px #ffffff;
+}
+
+#colorPickerButton.hide {
+	visibility: hidden;
+}
+
+#colorPickerHideButton {
+	visibility: hidden;
+	left: 500px;
+}
+
+#colorPickerHideButton.visible {
+	visibility: visible;
+	width: 30px;
+	left: 500px;
 	margin-left: 5px;
 	padding: 7px;
 	cursor: pointer;
@@ -163,8 +195,11 @@ select{
 }
 
 .shapesButton{
-	width: 70px !important;
-	left: 950px !important;
+	width: 90px !important;
+	left: 820px !important;
+	font-size: 1.1rem;
+	position: absolute;
+	top: 0 !important;
 }
 
 .shapesButton:hover,
@@ -175,19 +210,34 @@ select{
              	-3px -3px 6px #ffffff;
 }
 
-.shapes-fill-button,
 .scissors-button,
 .snap-button{
 	left: 315px !important;
-	width: 160px !important;
+	width: 200px !important;
 	font-size: 1.1rem;
 	position: absolute;
 	top: 0 !important;
 }
 
-.shapes-fill-button{
-	left: 900px !important;
-	width: 70px !important;
+.font-dropdown {
+	position: relative;
+	width: 110px;
+	top: -55px;
+	left: 300px;
+	margin-right: 20px;
+}
+
+#font-input {
+	position: relative;
+	width: 110px;
+	top: -25px;
+	left: 560px;
+	height: 24px;
+}
+
+.font-3d {
+	left: 1030px !important;
+	width: 50px !important;
 }
 
 /* Stroke & Size Slider */
@@ -221,7 +271,7 @@ input[type="range"]::-webkit-slider-thumb:hover{
 	display: inline-block;
 	position: fixed;
 	top: 11px;
-	left: 545px;
+	left: 460px;
 }
 
 /* Tool Helper Pop Up */
